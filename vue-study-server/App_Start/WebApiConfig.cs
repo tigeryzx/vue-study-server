@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -30,6 +31,9 @@ namespace vue_study_server.App_Start
             var cors = new EnableCorsAttribute(ConfigurationManager.AppSettings["origins"], "*", "*");
             //var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
+
+            // 对 JSON 数据使用混合大小写。驼峰式,但是是javascript 首字母小写形式.
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new  CamelCasePropertyNamesContractResolver();
         }
     }
 }
